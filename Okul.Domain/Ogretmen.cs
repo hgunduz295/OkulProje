@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Okul.Domain
 {
@@ -13,5 +14,10 @@ namespace Okul.Domain
 
         public DateTime DogumTarihi { get; set; }
         public decimal Maas { get; set; }
+
+        public int BransId { get; set; }
+        public Brans Brans { get; set; }
+
+        public ICollection<Plan> Planlar { get; set; }
     }
 }

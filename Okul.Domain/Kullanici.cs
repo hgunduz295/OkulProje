@@ -8,5 +8,6 @@ namespace Okul.Domain
         public string Password { get; set; }
         public string Role { get; set; }
         public DateTime LoginDate { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Okul.Domain
 {
@@ -13,5 +14,9 @@ namespace Okul.Domain
 
         public DateTime DogumTarihi { get; set; }
 
+        public int SinifId { get; set; }
+        public Sinif Sinif { get; set; }
+
+        public ICollection<Yoklama> Yoklamalar { get; set; }
     }
 }
