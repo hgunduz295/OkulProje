@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Okul.BLManager.Abstract;
+using Okul.BL.Abstract;
 using Okul.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebUI.Areas.Admin.Models;
 using WebUI.Areas.Admin.Models.Dtos;
 
@@ -21,8 +19,8 @@ namespace WebUI.Areas.Admin.Controllers
         private readonly ISinifManager sinifManager;
         private readonly IMapper mapper;
 
-        public OgrenciController(IOgrenciManager manager ,
-            ISinifManager sinifManager , 
+        public OgrenciController(IOgrenciManager manager,
+            ISinifManager sinifManager,
             IMapper mapper)
         {
             this.manager = manager;
@@ -44,15 +42,15 @@ namespace WebUI.Areas.Admin.Controllers
         public IActionResult Create()
         {
             OgrenciCreateDto createDto = new OgrenciCreateDto();
-            
+
             createDto.OgrenciDto = new OgrenciDto();
             //createDto.Sinif = 
 
             //new SelectList(fruits, "Id", "SinifAdi");
-            var siniflar =  sinifManager.GetAll(null);
+            var siniflar = sinifManager.GetAll(null);
             var sinifSelect = mapper.Map<List<Sinif>, List<SinifModel>>(siniflar);
-            createDto.Sinif  = new SelectList(sinifSelect, "Id", "SinifAdi");
-            
+            createDto.Sinif = new SelectList(sinifSelect, "Id", "SinifAdi");
+
             return View(createDto);
         }
 
@@ -71,7 +69,7 @@ namespace WebUI.Areas.Admin.Controllers
                 //og.Gsm = dto.Gsm;
                 //og.Cinsiyet = dto.Cinsiyet;
 
-                var ogrenci=  mapper.Map<OgrenciDto, Ogrenci>(dto.OgrenciDto);
+                var ogrenci = mapper.Map<OgrenciDto, Ogrenci>(dto.OgrenciDto);
                 ogrenci.SinifId = 1;
                 try
                 {
@@ -86,7 +84,7 @@ namespace WebUI.Areas.Admin.Controllers
 
                     ModelState.AddModelError("", ex.Message);
                 }
-               
+
             }
 
             return View(dto);

@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Okul.DAL\Okul.DAL.csproj" />
+    <ProjectReference Include="..\Okul.Domain\Okul.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

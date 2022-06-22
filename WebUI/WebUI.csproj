@@ -4,4 +4,16 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Okul.BL\Okul.BL.csproj" />
+    <ProjectReference Include="..\Okul.DAL\Okul.DAL.csproj" />
+    <ProjectReference Include="..\Okul.Domain\Okul.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

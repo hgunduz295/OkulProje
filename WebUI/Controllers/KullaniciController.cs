@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Okul.BLManager.Abstract;
+using Okul.BL.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;

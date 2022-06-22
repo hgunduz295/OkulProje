@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Okul.BLManager.Abstract;
-using Okul.DAL.Abstract;
-using Okul.DAL.EfCore;
+using Okul.BL.Abstract;
 using Okul.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebUI.Models;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -15,12 +8,12 @@ namespace WebUI.Areas.Admin.Controllers
     {
 
         //Sadece Constructer icerisinde set edilebilir
-        
+
         private readonly IBransManager manager;
 
         public BransController(IBransManager manager)
         {
-            
+
             this.manager = manager;
         }
         public IActionResult Index()
@@ -36,7 +29,7 @@ namespace WebUI.Areas.Admin.Controllers
 
             return View(branslar);
         }
-       
+
 
         [HttpGet]
         public IActionResult Create()
@@ -44,7 +37,7 @@ namespace WebUI.Areas.Admin.Controllers
             Brans entity = new Brans();
             return View(entity);
         }
-        
+
         [HttpPost]
         public IActionResult Create(Brans brans)
         {
@@ -52,13 +45,13 @@ namespace WebUI.Areas.Admin.Controllers
             {
                 //repository.Insert(brans);
                 if (!manager.CheckForBransName(brans.BransAdi))
-                {   
+                {
                     manager.Add(brans);
                     return RedirectToAction("Index", "Brans");
-        
+
                 }
-                ModelState.AddModelError("", "Bu brans daha once tanimlanmistir.");       
-                
+                ModelState.AddModelError("", "Bu brans daha once tanimlanmistir.");
+
             }
 
 
@@ -90,13 +83,13 @@ namespace WebUI.Areas.Admin.Controllers
             var entity = manager.Find(id);
             return View(entity);
         }
-        
+
         [HttpPost]
         public IActionResult Delete(Brans brans)
         {
-             manager.Delete(brans);
+            manager.Delete(brans);
             return RedirectToAction("Index", "Brans");
-             
+
         }
     }
 }

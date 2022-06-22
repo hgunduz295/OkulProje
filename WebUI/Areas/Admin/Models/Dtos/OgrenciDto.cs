@@ -1,15 +1,12 @@
 ﻿using Okul.Domain;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebUI.Areas.Admin.Models.Dtos
 {
     public class OgrenciDto
     {
-        [Required(ErrorMessage ="Ad Alani Boş Olamaz")]
+        [Required(ErrorMessage = "Ad Alani Boş Olamaz")]
         [MaxLength(50)]
         public string Adi { get; set; }
 
@@ -21,10 +18,10 @@ namespace WebUI.Areas.Admin.Models.Dtos
         [Required(ErrorMessage = "TCNo Alani Boş Olamaz")]
         [MaxLength(11)]
         public string TcNo { get; set; }
-        
+
         [EmailAddress]
         public string Email { get; set; }
-        
+
         [Phone]
         public string Gsm { get; set; }
 

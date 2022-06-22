@@ -1,0 +1,39 @@
+﻿using Okul.Domain;
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace WebUI.Areas.Admin.Models.Dtos
+{
+    public class OgretmenDto
+    {
+        [Required(ErrorMessage = "Ad Alani Boş Olamaz")]
+        [MaxLength(50)]
+        public string Adi { get; set; }
+
+        [Required(ErrorMessage = "Soyad Alani Boş Olamaz")]
+        [MaxLength(50)]
+        public string Soyadi { get; set; }
+
+
+        [Required(ErrorMessage = "TCNo Alani Boş Olamaz")]
+        [MaxLength(11)]
+        public string TcNo { get; set; }
+
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Phone]
+        public string Gsm { get; set; }
+        public decimal Maas { get; set; }
+        //[Required(ErrorMessage ="Cisiyet alani Zorunludur")]
+        public bool Cinsiyet { get; set; }
+        public DateTime DogumTarihi { get; set; }
+
+        public int SinifId { get; set; }
+        public Sinif Sinif { get; set; }
+        public int BransId { get; set; }
+        public Brans Brans { get; set; }
+
+
+    }
+}
