@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Okul.Domain
 {
-    public class Ogretmen : BaseEntity
+    public class Ogretmen:BaseEntity
     {
         public string Adi { get; set; }
         public string Soyadi { get; set; }
@@ -19,6 +22,7 @@ namespace Okul.Domain
         public Brans Brans { get; set; }
 
         public ICollection<Plan> Planlar { get; set; }
+
 
     }
 }

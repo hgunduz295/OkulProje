@@ -26,10 +26,12 @@ namespace Okul.Domain
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
+
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=OkulVTl;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             //optionsBuilder.UseNpgsql(@"Server=127.0.0.1;Port=5432;Database=OkulDb;User Id=postgres;Password=123;");
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -67,7 +69,7 @@ namespace Okul.Domain
             modelBuilder.Entity<Ogretmen>().Property(e => e.Gsm).HasMaxLength(15);
 
             modelBuilder.Entity<Ogretmen>().HasData(
-               new Ogretmen { Adi = "Ayse", Soyadi = "Yilmaz", TcNo = "12345678901", BransId = 1, SinifId = 1, Id = 1 }
+               new Ogretmen { Adi = "Ayse", Soyadi = "Yilmaz", TcNo = "12345678901", BransId = 1, Id = 1 }
                );
 
             modelBuilder.Entity<Ogretmen>()

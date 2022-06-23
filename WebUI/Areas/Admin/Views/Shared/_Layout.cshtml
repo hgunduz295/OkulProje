@@ -506,6 +506,8 @@
     <!-- Page level custom scripts -->
     <script src="~/AdminTema/js/demo/chart-area-demo.js"></script>
     <script src="~/AdminTema/js/demo/chart-pie-demo.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+        
 
 </body>
 

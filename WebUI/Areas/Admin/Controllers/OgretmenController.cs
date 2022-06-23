@@ -6,38 +6,186 @@ using Okul.BL.Abstract;
 using Okul.Domain;
 using System;
 using System.Collections.Generic;
-using WebUI.Areas.Admin.Models;
 using WebUI.Areas.Admin.Models.Dtos;
 
 namespace WebUI.Areas.Admin.Controllers
 {
+    //[Area("Admin")]
+    //public class OgretmenController : Controller
+    //{
+    //    private readonly OkulDbContext _context;
+
+    //    public OgretmenController(OkulDbContext context)
+    //    {
+    //        _context = context;
+    //    }
+
+    //    // GET: Admin/Ogretmen
+    //    public async Task<IActionResult> Index()
+    //    {
+    //        var okulDbContext = _context.Ogretmenler.Include(o => o.Brans);
+    //        return View(await okulDbContext.ToListAsync());
+    //    }
+
+    //    // GET: Admin/Ogretmen/Details/5
+    //    public async Task<IActionResult> Details(int? id)
+    //    {
+    //        if (id == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        var ogretmen = await _context.Ogretmenler
+    //            .Include(o => o.Brans)
+    //            .FirstOrDefaultAsync(m => m.Id == id);
+    //        if (ogretmen == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        return View(ogretmen);
+    //    }
+
+    //    // GET: Admin/Ogretmen/Create
+    //    public IActionResult Create()
+    //    {
+    //        ViewData["BransId"] = new SelectList(_context.Branslar, "Id", "Id");
+    //        return View();
+    //    }
+
+    //    // POST: Admin/Ogretmen/Create
+    //    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    //    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    //    [HttpPost]
+    //    [ValidateAntiForgeryToken]
+    //    public async Task<IActionResult> Create([Bind("Adi,Soyadi,TcNo,Email,Gsm,Cinsiyet,DogumTarihi,Maas,BransId,Id,CreateDate")] Ogretmen ogretmen)
+    //    {
+    //        if (ModelState.IsValid)
+    //        {
+    //            _context.Add(ogretmen);
+    //            await _context.SaveChangesAsync();
+    //            return RedirectToAction(nameof(Index));
+    //        }
+    //        ViewData["BransId"] = new SelectList(_context.Branslar, "Id", "Id", ogretmen.BransId);
+    //        return View(ogretmen);
+    //    }
+
+    //    // GET: Admin/Ogretmen/Edit/5
+    //    public async Task<IActionResult> Edit(int? id)
+    //    {
+    //        if (id == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        var ogretmen = await _context.Ogretmenler.FindAsync(id);
+    //        if (ogretmen == null)
+    //        {
+    //            return NotFound();
+    //        }
+    //        ViewData["BransId"] = new SelectList(_context.Branslar, "Id", "Id", ogretmen.BransId);
+    //        return View(ogretmen);
+    //    }
+
+    //    // POST: Admin/Ogretmen/Edit/5
+    //    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    //    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    //    [HttpPost]
+    //    [ValidateAntiForgeryToken]
+    //    public async Task<IActionResult> Edit(int id, [Bind("Adi,Soyadi,TcNo,Email,Gsm,Cinsiyet,DogumTarihi,Maas,BransId,Id,CreateDate")] Ogretmen ogretmen)
+    //    {
+    //        if (id != ogretmen.Id)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        if (ModelState.IsValid)
+    //        {
+    //            try
+    //            {
+    //                _context.Update(ogretmen);
+    //                await _context.SaveChangesAsync();
+    //            }
+    //            catch (DbUpdateConcurrencyException)
+    //            {
+    //                if (!OgretmenExists(ogretmen.Id))
+    //                {
+    //                    return NotFound();
+    //                }
+    //                else
+    //                {
+    //                    throw;
+    //                }
+    //            }
+    //            return RedirectToAction(nameof(Index));
+    //        }
+    //        ViewData["BransId"] = new SelectList(_context.Branslar, "Id", "Id", ogretmen.BransId);
+    //        return View(ogretmen);
+    //    }
+
+    //    // GET: Admin/Ogretmen/Delete/5
+    //    public async Task<IActionResult> Delete(int? id)
+    //    {
+    //        if (id == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        var ogretmen = await _context.Ogretmenler
+    //            .Include(o => o.Brans)
+    //            .FirstOrDefaultAsync(m => m.Id == id);
+    //        if (ogretmen == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        return View(ogretmen);
+    //    }
+
+    //    // POST: Admin/Ogretmen/Delete/5
+    //    [HttpPost, ActionName("Delete")]
+    //    [ValidateAntiForgeryToken]
+    //    public async Task<IActionResult> DeleteConfirmed(int id)
+    //    {
+    //        var ogretmen = await _context.Ogretmenler.FindAsync(id);
+    //        _context.Ogretmenler.Remove(ogretmen);
+    //        await _context.SaveChangesAsync();
+    //        return RedirectToAction(nameof(Index));
+    //    }
+
+    //    private bool OgretmenExists(int id)
+    //    {
+    //        return _context.Ogretmenler.Any(e => e.Id == id);
+    //    }
+    //}
+
     [Area("Admin")]
+
     [Authorize]
     public class OgretmenController : Controller
     {
-
         private readonly IOgretmenManager manager;
-        private readonly ISinifManager sinifManager;
+        private readonly IBransManager BransManager;
         private readonly IMapper mapper;
 
         public OgretmenController(IOgretmenManager manager,
-            ISinifManager sinifManager,
+            IBransManager BransManager,
             IMapper mapper)
         {
             this.manager = manager;
-            this.sinifManager = sinifManager;
+            this.BransManager = BransManager;
             this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            List<Ogretmen> ogretmenler = new List<Ogretmen>();
-            ogretmenler = manager.GetAll(null);
+            List<Ogretmen> Ogretmenler = new List<Ogretmen>();
+            Ogretmenler = manager.GetAll(null);
 
+            if (Ogretmenler.Count == 0)
+                Ogretmenler.Add(new Ogretmen());
 
-            ogretmenler.Add(new Ogretmen());
-
-            return View(ogretmenler);
+            return View(Ogretmenler);
         }
 
         public IActionResult Create()
@@ -45,12 +193,12 @@ namespace WebUI.Areas.Admin.Controllers
             OgretmenCreateDto createDto = new OgretmenCreateDto();
 
             createDto.OgretmenDto = new OgretmenDto();
-            //createDto.Sinif = 
+            //createDto.brans = 
 
-            //new SelectList(fruits, "Id", "SinifAdi");
-            var siniflar = sinifManager.GetAll(null);
-            var sinifSelect = mapper.Map<List<Sinif>, List<SinifModel>>(siniflar);
-            createDto.Sinif = new SelectList(sinifSelect, "Id", "SinifAdi");
+            //new SelectList(fruits, "Id", "bransAdi");
+            var branslar = BransManager.GetAll(null);
+            var bransSelect = mapper.Map<List<Brans>, List<BransModel>>(branslar);
+            createDto.Brans = new SelectList(bransSelect, "Id", "BransAdi");
 
             return View(createDto);
         }
@@ -63,19 +211,20 @@ namespace WebUI.Areas.Admin.Controllers
             {
                 // Kayit sirasinda amele yontemi 
 
-                //Ogrenci og = new Ogrenci();
+                //Ogretmen og = new Ogretmen();
                 //og.Adi = dto.Adi;
                 //og.Soyadi = dto.Soyadi;
                 //og.TcNo = dto.TcNo;
                 //og.Gsm = dto.Gsm;
                 //og.Cinsiyet = dto.Cinsiyet;
 
-                var ogretmen = mapper.Map<OgretmenDto, Ogretmen>(dto.OgretmenDto);
-                ogretmen.SinifId = 1;
+                var Ogretmen = mapper.Map<OgretmenDto, Ogretmen>(dto.OgretmenDto);
+                Ogretmen.BransId = dto.OgretmenDto.BransId;
                 try
                 {
-
-                    manager.Add(ogretmen);
+                    manager.CheckForTckimlik(Ogretmen.TcNo);
+                    manager.CheckForGsm(Ogretmen.Gsm);
+                    manager.Add(Ogretmen);
 
                     return RedirectToAction("Index", "Ogretmen", new { Areas = "Admin" });
                 }

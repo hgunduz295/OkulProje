@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Okul.Domain
 {
-    public class Plan : BaseEntity
+    public class Plan:BaseEntity
     {
+
         public DateTime Tarih { get; set; }
         public DateTime Saat { get; set; }
 
@@ -20,6 +24,8 @@ namespace Okul.Domain
         public Ogretmen Ogretmen { get; set; }
 
         public ICollection<Yoklama> Yoklamalar { get; set; }
+
+
 
     }
 }

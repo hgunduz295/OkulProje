@@ -1,4 +1,94 @@
-﻿@model IEnumerable<Ogretmen>
+﻿@*@model IEnumerable<Okul.Domain.Ogretmen>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Adi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Soyadi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TcNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gsm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cinsiyet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DogumTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Maas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brans)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soyadi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TcNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gsm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cinsiyet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DogumTarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Maas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brans.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+*@
+@model IEnumerable<Ogretmen>
 
 
     <a class="btn btn-success" asp-controller="Ogretmen" asp-action="Create">Yeni</a>
@@ -16,6 +106,7 @@
             <td> @Html.DisplayNameFor(model => model.Email)</td>
             <td> @Html.DisplayNameFor(model => model.DogumTarihi)</td>
             <td> @Html.DisplayNameFor(model => model.Cinsiyet)</td>
+            <td> @Html.DisplayNameFor(model => model.BransId))</td>
             <td>İşlem</td>
         </tr>
     </thead>
@@ -32,6 +123,8 @@
                 <td>@item.Email</td>
                 <td>@item.DogumTarihi</td>
                 <td>@item.Cinsiyet</td>
+            <td> @item.BransId</td>
+
 
                 <td>
                     <a asp-controller="Ogretmen" asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">Guncelle</a>

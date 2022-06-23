@@ -13,6 +13,8 @@ namespace WebUI.Areas.Admin.Models
             CreateMap<Ogretmen, OgretmenDto>();
             CreateMap<OgretmenDto, Ogretmen>();
             CreateMap<Sinif, SinifModel>();
+            CreateMap<Brans, BransModel>();
+
             // CreateMap<List<Sinif>, List<SinifModel>>();
 
         }
