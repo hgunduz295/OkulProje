@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Okul.BL.Abstract;
 using Okul.Domain;
-using System;
 using System.Collections.Generic;
 using WebUI.Areas.Admin.Models;
 using WebUI.Areas.Admin.Models.Dtos;
@@ -16,78 +15,122 @@ namespace WebUI.Areas.Admin.Controllers
     public class OgrenciController : Controller
     {
         private readonly IOgrenciManager manager;
-        private readonly ISinifManager sinifManager;
         private readonly IMapper mapper;
+        private readonly ISinifManager sinifManager;
 
-        public OgrenciController(IOgrenciManager manager,
-            ISinifManager sinifManager,
-            IMapper mapper)
+        public OgrenciController(IOgrenciManager manager, IMapper mapper, ISinifManager sinifManager)
         {
             this.manager = manager;
-            this.sinifManager = sinifManager;
             this.mapper = mapper;
+            this.sinifManager = sinifManager;
         }
-
         public IActionResult Index()
         {
-            List<Ogrenci> ogrenciler = new List<Ogrenci>();
-            ogrenciler = manager.GetAll(null);
-
-            if (ogrenciler.Count == 0)
-                ogrenciler.Add(new Ogrenci());
-
+            var ogrenciler = manager.GetAll(null);
             return View(ogrenciler);
         }
 
+
+        [HttpGet]
         public IActionResult Create()
         {
-            OgrenciCreateDto createDto = new OgrenciCreateDto();
-
-            createDto.OgrenciDto = new OgrenciDto();
-            //createDto.Sinif = 
-
-            //new SelectList(fruits, "Id", "SinifAdi");
+            var ogrenci = new OgrenciCreateDto();
             var siniflar = sinifManager.GetAll(null);
-            var sinifSelect = mapper.Map<List<Sinif>, List<SinifModel>>(siniflar);
-            createDto.Sinif = new SelectList(sinifSelect, "Id", "SinifAdi");
+            List<SinifModel> SiniflarSelecList = new();
+            foreach (var item in siniflar)
+            {
+                SiniflarSelecList.Add(new SinifModel { SinifId = item.Id, SinifAdi = item.SinifAdi });
+            }
 
-            return View(createDto);
+            ViewBag.Siniflar = new SelectList(SiniflarSelecList, "SinifId", "SinifAdi");
+            return View(ogrenci);
         }
 
         [HttpPost]
-        public IActionResult Create(OgrenciCreateDto dto)
+        public IActionResult Create(OgrenciCreateDto input)
+        {
+            if (ModelState.IsValid)
+            {
+                // Amele yontem 
+
+                //Ogrenci ogrenci = new Ogrenci();
+                //ogrenci.Adi= input.Adi;
+                //ogrenci.Soyadi = input.Soyadi;
+                var ogrenci = mapper.Map<OgrenciCreateDto, Ogrenci>(input);
+
+
+                manager.Add(ogrenci);
+                RedirectToAction("Index", "Ogrenci");
+            }
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var ogrenci = manager.Find(id);
+            var updateDto = mapper.Map<Ogrenci, OgrenciCreateDto>(ogrenci);
+
+            var siniflar = sinifManager.GetAll(null);
+            List<SinifModel> sinifModels = new();
+            foreach (var item in siniflar)
+            {
+                sinifModels.Add(new SinifModel { SinifId = item.Id, SinifAdi = item.SinifAdi });
+            }
+
+            var sinifSelectList = new SelectList(sinifModels, "SinifId", "SinifAdi");
+
+            ViewBag.Siniflar = sinifSelectList;
+            return View(updateDto);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Update(OgrenciCreateDto input)
         {
 
             if (ModelState.IsValid)
             {
-                // Kayit sirasinda amele yontemi 
+                var ogrenci = mapper.Map<OgrenciCreateDto, Ogrenci>(input);
 
-                //Ogrenci og = new Ogrenci();
-                //og.Adi = dto.Adi;
-                //og.Soyadi = dto.Soyadi;
-                //og.TcNo = dto.TcNo;
-                //og.Gsm = dto.Gsm;
-                //og.Cinsiyet = dto.Cinsiyet;
+                manager.Update(ogrenci);
+                return RedirectToAction("Index", "Ogrenci");
 
-                var ogrenci = mapper.Map<OgrenciDto, Ogrenci>(dto.OgrenciDto);
-                ogrenci.SinifId = 1;
-                try
-                {
-                    manager.CheckForTckimlik(ogrenci.TcNo);
-                    manager.CheckForGsm(ogrenci.Gsm);
-                    manager.Add(ogrenci);
-
-                    return RedirectToAction("Index", "Ogrenci", new { Areas = "Admin" });
-                }
-                catch (Exception ex)
-                {
-
-                    ModelState.AddModelError("", ex.Message);
-                }
 
             }
 
-            return View(dto);
+
+            ModelState.AddModelError("", "TcKimlik numarasi yanliş girilmiş");
+
+
+            return View();
         }
+
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var entity = manager.Find(id);
+            return View(entity);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Delete(Ogrenci input)
+        {
+
+
+
+            manager.Delete(input);
+            return RedirectToAction("Index", "Ogrenci");
+
+
+        }
+
+
+
     }
 }

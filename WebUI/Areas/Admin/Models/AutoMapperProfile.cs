@@ -8,10 +8,10 @@ namespace WebUI.Areas.Admin.Models
     {
         public AutoMapperProfile()
         {
-            CreateMap<Ogrenci, OgrenciDto>();
-            CreateMap<OgrenciDto, Ogrenci>();
-            CreateMap<Ogretmen, OgretmenDto>();
-            CreateMap<OgretmenDto, Ogretmen>();
+            CreateMap<Ogrenci, OgrenciCreateDto>();
+            CreateMap<OgrenciCreateDto, Ogrenci>();
+            CreateMap<Ogretmen, OgretmenCreateDto>();
+            CreateMap<OgretmenCreateDto, Ogretmen>();
             CreateMap<Sinif, SinifModel>();
             CreateMap<Brans, BransModel>();
 

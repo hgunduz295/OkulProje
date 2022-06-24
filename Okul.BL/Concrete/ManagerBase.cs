@@ -53,5 +53,6 @@ namespace Okul.BL.Concrete
             return db.GetAllInclude(filter, include);
         }
 
+
     }
 }

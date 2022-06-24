@@ -1,75 +1,79 @@
 ﻿@model OgrenciCreateDto
+    
 
+<form method="post" asp-controller="Ogrenci" asp-action="Create">
 
-    <form method="post" asp-action="Create" asp-controller="Ogrenci">
+    @Html.ValidationSummary(true)
 
+    <div class="form-group row">
+        <label asp-for="Adi" class="col-md-2 col-form-label"></label>
 
-
-        <div class="card card-info">
-            <div class="card-header">
-                <h3 class="card-title">Ögrenci Kayit</h3>
-            </div>
-
-            @Html.ValidationSummary()
-        <div class="card-body">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Adi" asp-for="@Model.OgrenciDto.Adi">
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                                   <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
-
-                </div>
-                <input type="text" class="form-control" placeholder="Soyadi" asp-for="@Model.OgrenciDto.Soyadi">
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-                    
-                </div>
-                <input type="text" class="form-control" placeholder="TcKimlik" asp-for="@Model.OgrenciDto.TcNo">
-            </div>
-
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                </div>
-                <input type="email" class="form-control" placeholder="Email" asp-for="@Model.OgrenciDto.Email">
-            </div>
-
-
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                </div>
-                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric" asp-for="@Model.OgrenciDto.DogumTarihi">
-            </div>
-
-
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                </div>
-                <input type="text" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="tel" asp-for="@Model.OgrenciDto.Gsm" placeholder="telegon numarasi">
-            </div>
-            <select id="ddlSinif" name="Id" asp-items="Model.Sinif">
-                <option value="0">Sinif Seciniz</option>
-            </select>
-
-            <div class="bootstrap-switch-container" style="width: 126px; margin-left: 42px;">
-                <span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 42px;">Bayan</span><span class="bootstrap-switch-label" style="width: 42px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 42px;">Erkek</span><input type="checkbox" name="my-checkbox" checked="" data-bootstrap-switch="" data-off-color="danger" data-on-color="success">
-            </div>
-
-            <button type="submit" class="btn btn-info">Sign in</button>
-            <!-- /input-group -->
+        <div class="col-md-10">
+            <input type="text" asp-for="Adi" class="form-control" />
+            <span asp-validation-for="Adi" class="text-danger"></span>
         </div>
-            <!-- /.card-body -->
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Soyadi" class="col-md-2 col-form-label"></label>
+
+        <div class="col-md-10">
+            <input type="text" asp-for="Soyadi" class="form-control" />
+            <span asp-validation-for="Soyadi" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="TcNo" class="col-md-2 col-form-label"></label>
+
+        <div class="col-md-10">
+            <input type="text" asp-for="TcNo" class="form-control" />
+            <span asp-validation-for="TcNo" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label asp-for="Gsm" class="col-md-2 col-form-label"></label>
+
+        <div class="col-md-10">
+            <input type="text" asp-for="Gsm" class="form-control" />
+            <span asp-validation-for="Gsm" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Email" class="col-md-2 col-form-label"></label>
+
+        <div class="col-md-10">
+            <input type="text" asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    Cinsiyet &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     <label for="flexSwitchCheckDefault"    asp-for="Cinsiyet" class="switch">
+  <input id="flexSwitchCheckDefault" asp-for="Cinsiyet" type="checkbox">
+  <span class="slider round"></span>
+</label>
+@*
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" asp-for="Cinsiyet">
+        <label class="form-check-label" for="flexSwitchCheckDefault" asp-for="Cinsiyet"> Cinsiyet </label>*@
+    
+
+    <div class="form-group row">
+        <label asp-for="DogumTarihi" class="col-md-2 col-form-label"></label>
+
+        <div class="col-md-10">
+            <input type="date" asp-for="DogumTarihi" class="form-control" />
+            <span asp-validation-for="DogumTarihi" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <select id="ddlSinif" asp-for="SinifId" asp-items="@ViewBag.Siniflar">
+            <option value="0">Sinif Seciniz</option>
+        </select>
+     </div>
+        <div class="form-group row">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
         </div>
 
-    </form>
+</form>

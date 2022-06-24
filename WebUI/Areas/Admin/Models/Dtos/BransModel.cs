@@ -2,7 +2,7 @@
 {
     public class BransModel
     {
-        public int Id { get; set; }
+        public int BransId { get; set; }
         public string BransAdi { get; set; }
     }
 }

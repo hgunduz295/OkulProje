@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Okul.BL.Abstract
 {
-    public interface IManager<TEntity>  where TEntity :class ,new()
+    public interface IManager<TEntity> where TEntity : class, new()
     {
         void Add(TEntity model);
         void Update(TEntity model);
@@ -17,6 +15,7 @@ namespace Okul.BL.Abstract
         List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter);
         IQueryable<TEntity> GetAllInclude(Expression<Func<TEntity, bool>> filter = null,
                                    params Expression<Func<TEntity, object>>[] include);
+
 
     }
 }

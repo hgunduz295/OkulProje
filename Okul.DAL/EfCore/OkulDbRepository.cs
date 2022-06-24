@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Okul.DAL.EfCore
 {
@@ -46,11 +44,11 @@ namespace Okul.DAL.EfCore
         public void Update(TEntity entity)
         {
 
-           
-           
+
+
             //dbContext.Entry(entity).State = EntityState.Modified;
             //dbContext.Update<TEntity>(entity);
-           dbContext.Entry<TEntity>(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            dbContext.Entry<TEntity>(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             //dbContext.Set<TEntity>().Update(entity);
             dbContext.SaveChanges();
         }
@@ -78,5 +76,7 @@ namespace Okul.DAL.EfCore
 
 
         }
+
+
     }
 }
