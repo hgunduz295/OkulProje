@@ -6,6 +6,7 @@ namespace WebUI.Areas.Admin.Models.Dtos
 {
     public class OgretmenCreateDto
     {
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Ad Alani Boş Olamaz")]
         [MaxLength(50)]

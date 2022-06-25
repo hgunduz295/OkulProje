@@ -1,26 +1,32 @@
 ﻿@model IEnumerable<Sinif>
-      <div class="card card-info"> <div class="card card-info">
 
-<h3>Sinif Listesi</h3>
-  <div class="table-responsive">
-<table class="table table-bordered">
+ 
+   
+        <a class="btn btn-success" asp-controller="Sinif" asp-action="Create">Yeni</a>
+       
+<table class="table table-hover">
+
+
     <thead>
         <tr>
-            <td>@Html.DisplayNameFor(model => model.Id)</td>
-            <td>@Html.DisplayNameFor(model => model.SinifAdi)</td>
-            <td>@Html.DisplayNameFor(model => model.Kapasite)</td>
+            <td> @Html.DisplayNameFor(model => model.Id)</td>
+            <td> @Html.DisplayNameFor(model => model.SinifAdi)</td>
+            <td>İşlem</td>
         </tr>
     </thead>
-
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.SinifAdi</td>
-                <td>@item.Kapasite</td>
-            </tr>
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.SinifAdi</td>
+            <td>
+                <a asp-controller="Sinif" asp-action="Update" asp-route-id="@item.Id" class="btn btn-secondary">Guncelle</a>
+                <a asp-controller="Sinif" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Sil</a>
+            </td>
+        </tr>
         }
 
     </tbody>
-</table></div></div>
+</table> 
+

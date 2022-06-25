@@ -1,0 +1,14 @@
+﻿@model Sinif
+
+<form method="post" asp-controller="Sinif" asp-action="Delete">
+
+    <div class="form-group row">
+        <label asp-for="SinifAdi" class="col-md-2 col-form-label">@Model.SinifAdi</label>
+        <p>Bu kaydi Silmek istediginizden eminmisiniz ?</p>
+
+    </div>
+    <div class="form-group row">
+        <button type="submit" class="btn btn-primary">Sil</button>
+        <a  class="btn btn-secondary" asp-action="Index" asp-controller="Sinif">Listeye Geri Dön</a>
+    </div>
+</form>

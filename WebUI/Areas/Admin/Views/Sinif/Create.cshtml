@@ -1,14 +1,14 @@
-﻿@model Brans 
+﻿@model Sinif 
 
-<form method="post" asp-controller="Brans" asp-action="Create">
+<form method="post" asp-controller="Sinif" asp-action="Create">
 
     @Html.ValidationSummary(true)
 
     <div class="form-group row">
-        <label asp-for="BransAdi" class="col-md-6 col-form-label"></label>
+        <label asp-for="SinifAdi" class="col-md-6 col-form-label"></label>
 
         <div class="col-md-6">
-            <input type="text" asp-for="BransAdi" class="form-control" />
+            <input type="text" asp-for="SinifAdi" class="form-control" />
 
         </div>
     </div>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-md-6">
-            <a  class="btn btn-secondary" asp-action="Index" asp-controller="Brans">Listeye Geri Dön</a>
+            <a  class="btn btn-secondary" asp-action="Index" asp-controller="Sinif">Listeye Geri Dön</a>
          </div>
         </div>
 </form>
